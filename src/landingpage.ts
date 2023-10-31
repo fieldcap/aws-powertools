@@ -21,6 +21,8 @@ const reload = async () => {
     return;
   }
 
+  await sendMessage('setStartUrl', window.location.href);
+
   const ssoExpander = document.querySelectorAll('sso-expander');
 
   if (ssoExpander.length === 0) {

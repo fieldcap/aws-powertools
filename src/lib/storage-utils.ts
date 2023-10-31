@@ -8,6 +8,7 @@ export const getSettings = async (): Promise<Settings> => {
     log(`no settings found, returning default settings`);
     return {
       accounts: [],
+      startUrl: null,
     };
   }
 

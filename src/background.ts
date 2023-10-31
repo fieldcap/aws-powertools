@@ -20,6 +20,10 @@ browser.runtime.onMessage.addListener(
           await patchSettings({ accounts: message.message });
           break;
         }
+        case 'setStartUrl': {
+          await patchSettings({ startUrl: message.message });
+          break;
+        }
         case 'getSettings':
           result = await getSettings();
           break;
@@ -31,8 +35,11 @@ browser.runtime.onMessage.addListener(
 );
 
 browser.tabs.onCreated.addListener(async (tab) => {
-  const identity = await getIdentityContext(tab.id);
-  if (identity && tab.url === 'about:blank') {
-    browser.tabs.update(null, { url: 'https://console.aws.amazon.com' });
+  if (tab.url === 'about:blank' && !tab.openerTabId) {
+    const identity = await getIdentityContext(tab.id);
+
+    if (identity) {
+      browser.tabs.update(null, { url: 'https://console.aws.amazon.com' });
+    }
   }
 });

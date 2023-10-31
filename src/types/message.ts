@@ -7,7 +7,7 @@ export type TabMessage = {
   type: TabMessageType;
 };
 
-export type BackgroundMessageType = 'getContext' | 'setAccounts' | 'getSettings';
+export type BackgroundMessageType = 'getContext' | 'setAccounts' | 'setStartUrl' | 'getSettings';
 
 export type BackgroundMessageResult<T> = {
   tabId: number;
